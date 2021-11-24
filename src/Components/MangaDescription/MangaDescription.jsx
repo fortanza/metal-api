@@ -6,13 +6,15 @@ import DescriptionItem from 'Components/DescriptionItem/DescriptionItem';
 const MangaDescription = () => {
   const [description, setDescription] = useState([]);
 
-  const { id } = useParams;
+  const { id } = useParams();
 
   useEffect(() => {
     axios
-      .get(`https://api.jikan.moe/v3/anime/${id}`)
+      .get(`https://api.jikan.moe/v3/anime/${id.replace(':', '')}`)
       .then(({ data }) => {
-        const newDatas = data.results.map((newData) => {
+        const dataArray = [];
+        dataArray.push(data);
+        const newDatas = dataArray.map((newData) => {
           return {
             id: newData.mal_id,
             title: newData.title,
@@ -22,6 +24,7 @@ const MangaDescription = () => {
             source: newData.source,
             episodes: newData.episodes,
             status: newData.status,
+            trailer: newData.trailer_url,
           };
         });
         setDescription(newDatas);
@@ -30,7 +33,6 @@ const MangaDescription = () => {
         console.error('Plz fix your call, or set up your internet');
       });
   }, []);
-
   return (
     <section className="MangaDescription">
       <h2>Essai</h2>

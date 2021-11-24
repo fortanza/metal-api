@@ -5,13 +5,13 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <>
+    <main className="main">
       <h1>Welcome in the manga univers</h1>
       <Routes>
         <Route path="/" element={<MangaCards />} />
         <Route path="/mangaDescription:id" element={<MangaDescription />} />
       </Routes>
-    </>
+    </main>
   );
 }
 
